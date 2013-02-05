@@ -8,11 +8,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="container-menu">
-			<a class="link-menu" href="#"></a>
-		</div>
+	<button type="button" class="hide position-control prev">&uarr;</button>
+	<button type="button" class="hide position-control next">&darr;</button>
 
+	<div class="container-menu">
+		<a class="link-menu" href="#"></a>
+	</div>
+
+	<div class="container">
 		<div class="container-content">
 			<div class="content">
 				<div class="controls">
@@ -20,11 +23,9 @@
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
-				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1.935 Followers</a>
+				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
 			</div>
 		</div>
-
-		<button type="button" class="position-control next">&darr;</button>
 	</div>
 	<div class="container">
 		<div class="container-content">
@@ -34,12 +35,9 @@
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
-				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1.935 Followers</a>
+				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
 			</div>
 		</div>
-
-		<button type="button" class="position-control prev">&uarr;</button>
-		<button type="button" class="position-control next">&darr;</button>
 	</div>
 	<div class="container">
 		<div class="container-content">
@@ -49,41 +47,69 @@
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
-				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1.935 Followers</a>
+				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
 			</div>
 		</div>
-
-		<button type="button" class="position-control prev">&uarr;</button>
 	</div>
 
 	<script type="text/javascript">
 
 	(function( $ ) {
-		// Jump to next stream:
-		$('.position-control.next').on('click', function(event) {
-			var next = ($(this).closest('.container').next().position()).top;
 
-			$('html, body').stop().animate({
-				scrollTop: next
-			}, 250);
+		var ch  = $('.container').height();
+		var cs  = $('.container').length;
+		var end = ch * (cs - 1);
+		var pc  = $('.position-control');
+		var pcp = $('.position-control.prev');
+		var pcn = $('.position-control.next');
 
-			if ("A" == $(this).tagName) {
-				event.preventDefault();
-			}
+
+		$(window).resize( function() {
+			ch  = $('.container').height();
+			end = ch * (cs - 1);
 		});
 
-		// Jump to previous stream:
-		$('.position-control.prev').on('click', function(event) {
-			var prev = ($(this).closest('.container').prev().position()).top;
 
-			$('html, body').stop().animate({
-				scrollTop: prev
-			}, 250);
+		if (cs > 1) {
 
-			if ("A" == $(this).tagName) {
-				event.preventDefault();
-			}
-		});
+			pcn.removeClass('hide');
+
+			$(window).scroll( function() {
+				if (0 === $(this).scrollTop()) {
+					pcp.addClass('hide');
+				} else {
+					pcp.removeClass('hide');
+				}
+
+				if (end === $(this).scrollTop()) {
+					pcn.addClass('hide');
+				} else {
+					pcn.removeClass('hide');
+				}
+			});
+
+			// Jump to next stream:
+			pcn.on('click', function(event) {
+				var next = ($(this).closest('.container').next().position()).top;
+
+				$('html, body').stop().animate({
+					scrollTop: next
+				}, 250);
+			});
+
+			// Jump to previous stream:
+			pcp.on('click', function(event) {
+				var prev = ($(this).closest('.container').prev().position()).top;
+
+				$('html, body').stop().animate({
+					scrollTop: prev
+				}, 250);
+			});
+
+		} else {
+			pc.remove();
+		}
+
 	})( jQuery );
 
 	</script>
