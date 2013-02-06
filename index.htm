@@ -128,8 +128,8 @@
 				d  = $(this).scrollTop() / ch;
 
 				if (d % 1 != 0) {
-					ppc = Math.floor($(this).scrollTop() / ch);
-					npc = Math.ceil($(this).scrollTop() / ch);
+					ppc = Math.floor(sp / ch);
+					npc = Math.ceil(sp / ch);
 				} else {
 					ppc = d - 1;
 					npc = d + 1;
