@@ -77,8 +77,9 @@
 				cs.removeClass('hide');
 				$(this).text('Hide Stream');
 			} else {
-				cs.hide();
-				cs.addClass('hide');
+				cs.slideUp( function() {
+					cs.addClass('hide');
+				});
 				$(this).text('Show Stream');
 			}
 
