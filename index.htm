@@ -20,11 +20,14 @@
 		<div class="container-content">
 			<div class="content">
 				<div class="controls">
-					<button type="button" class="btn">View Stream</button>
+					<button type="button" class="btn stream-control">Show Stream</button>
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
+			</div>
+			<div class="carousel lol hide">
+
 			</div>
 		</div>
 	</div>
@@ -32,11 +35,14 @@
 		<div class="container-content">
 			<div class="content">
 				<div class="controls">
-					<button type="button" class="btn">View Stream</button>
+					<button type="button" class="btn stream-control">Show Stream</button>
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
+			</div>
+			<div class="carousel lol hide">
+
 			</div>
 		</div>
 	</div>
@@ -44,26 +50,55 @@
 		<div class="container-content">
 			<div class="content">
 				<div class="controls">
-					<button type="button" class="btn">View Stream</button>
+					<button type="button" class="btn stream-control">Show Stream</button>
 				</div>
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
+			</div>
+			<div class="carousel lol hide">
+
 			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript">
 
+	/* Stream View
+	============*/
 	(function( $ ) {
 
-		var cc  = 0;
+		$(".stream-control").click( function() {
+
+			var cs = $(this).parentsUntil('.container').find('.carousel');
+
+			if (cs.hasClass('hide')) {
+				cs.slideDown();
+				cs.removeClass('hide');
+				$(this).text('Hide Stream');
+			} else {
+				cs.hide();
+				cs.addClass('hide');
+				$(this).text('Show Stream');
+			}
+
+		});
+
+	})( jQuery );
+
+	/* Position Controls
+	================= */
+	(function( $ ) {
+
+		var ppc = 0;
+		var npc = 1;
 		var ch  = $('.container').height();
 		var cs  = $('.container').length;
 		var end = ch * (cs - 1);
 		var pc  = $('.position-control');
 		var pcp = $('.position-control.prev');
 		var pcn = $('.position-control.next');
+		var sp  = 0;
 
 
 		$(window).resize( function() {
@@ -88,31 +123,44 @@
 				} else {
 					pcn.removeClass('hide');
 				}
+
+				sp = $(this).scrollTop();
+				d  = $(this).scrollTop() / ch;
+
+				if (d % 1 != 0) {
+					ppc = Math.floor($(this).scrollTop() / ch);
+					npc = Math.ceil($(this).scrollTop() / ch);
+				} else {
+					ppc = d - 1;
+					npc = d + 1;
+				}
 			});
 
 			// Jump to next:
 			pcn.on('click', function(event) {
-				if ($('.container')[cc + 1]) {
-					cc++;
-
-					var next = $($('.container')[cc]).position().top;
+				if ($('.container')[npc]) {
+					var next = $($('.container')[npc]).position().top;
 
 					$('html, body').stop().animate({
 						scrollTop: next
 					}, 250);
+
+					npc++;
+					ppc = npc - 1;
 				}
 			});
 
 			// Jump to previous:
 			pcp.on('click', function(event) {
-				if ($('.container')[cc - 1]) {
-					cc--;
-
-					var prev = $($('.container')[cc]).position().top;
+				if ($('.container')[ppc]) {
+					var prev = $($('.container')[ppc]).position().top;
 
 					$('html, body').stop().animate({
 						scrollTop: prev
 					}, 250);
+
+					ppc--;
+					npc = ppc + 1;
 				};
 			});
 
