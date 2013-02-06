@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Live | Unknown Degree</title>
-	<meta http-equiv="refresh" content="30;url=index.htm">
+	<!-- <meta http-equiv="refresh" content="30;url=index.htm"> -->
 
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -70,17 +70,44 @@
 
 		$(".stream-control").click( function() {
 
-			var cs = $(this).parentsUntil('.container').find('.carousel');
+			var c   = $(this).parentsUntil('.container');
+			var cl  = c.find('.carousel');
 
-			if (cs.hasClass('hide')) {
-				cs.slideDown();
-				cs.removeClass('hide');
+			if (cl.hasClass('hide')) {
+				cl.slideDown();
+				cl.removeClass('hide');
 				$(this).text('Hide Stream');
+
+				transformView(c);
 			} else {
-				cs.slideUp( function() {
-					cs.addClass('hide');
+				cl.slideUp( function() {
+					cl.addClass('hide');
 				});
 				$(this).text('Show Stream');
+
+				untransformView(c);
+			}
+
+
+			function transformView(c)
+			{
+				var ch  = c.height();
+				var cc  = c.find('.content');
+				var cl  = c.find('.carousel');
+				var cch = cc.height();
+				var rr  = $(window).height() - cch;
+				var m   = Math.floor((rr / 100) * 5);
+
+				console.log(m);
+
+				cc.css({'margin-top': m, 'margin-bottom': m});
+
+				console.log(cc);
+			}
+
+			function untransformView(c)
+			{
+
 			}
 
 		});
@@ -139,6 +166,7 @@
 
 			// Jump to next:
 			pcn.on('click', function(event) {
+
 				if ($('.container')[npc]) {
 					var next = $($('.container')[npc]).position().top;
 
@@ -149,10 +177,12 @@
 					npc++;
 					ppc = npc - 1;
 				}
+
 			});
 
 			// Jump to previous:
 			pcp.on('click', function(event) {
+
 				if ($('.container')[ppc]) {
 					var prev = $($('.container')[ppc]).position().top;
 
@@ -163,6 +193,7 @@
 					ppc--;
 					npc = ppc + 1;
 				};
+
 			});
 
 		} else {
