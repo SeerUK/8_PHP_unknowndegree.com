@@ -5,8 +5,11 @@
 	<title>Live | Unknown Degree</title>
 	<!-- <meta http-equiv="refresh" content="30;url=index.htm"> -->
 
-	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+
+	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<button type="button" class="hide position-control prev">&uarr;</button>
@@ -68,51 +71,46 @@
 	============*/
 	(function( $ ) {
 
+		var c  = $('.container');
+		var cl = c.find('.carousel');
+		var cn = c.find('.content');
+		var nh = $(window).height() - cn.height() - 180;
+		var nw = $(window).width();
+
+
+		cl.height(nh).width(nw);
+
+		$(window).resize( function() {
+			nh = $(window).height() - cn.height() - 180;
+			nw = $(window).width();
+			cl.height(nh).width(nw);
+		});
+
+
 		$(".stream-control").click( function() {
 
-			var c   = $(this).parentsUntil('.container');
-			var cl  = c.find('.carousel');
+			var c  = $(this).parentsUntil('.container');
+			var cl = c.find('.carousel');
+
 
 			if (cl.hasClass('hide')) {
-				cl.slideDown();
-				cl.removeClass('hide');
+				cl.slideDown(1000);
+				cl.removeClass('hide').css('visibility', 'visible').fadeTo(400, 1);
 				$(this).text('Hide Stream');
-
-				transformView(c);
 			} else {
-				cl.slideUp( function() {
-					cl.addClass('hide');
+				cl.fadeTo(400, 0, function() {
+					cl.slideUp(1000, function() {
+						cl.addClass('hide').css('visibility', 'hidden');
+					});
 				});
 				$(this).text('Show Stream');
-
-				untransformView(c);
-			}
-
-
-			function transformView(c)
-			{
-				var ch  = c.height();
-				var cc  = c.find('.content');
-				var cl  = c.find('.carousel');
-				var cch = cc.height();
-				var rr  = $(window).height() - cch;
-				var m   = Math.floor((rr / 100) * 5);
-
-				console.log(m);
-
-				cc.css({'margin-top': m, 'margin-bottom': m});
-
-				console.log(cc);
-			}
-
-			function untransformView(c)
-			{
-
 			}
 
 		});
 
+
 	})( jQuery );
+
 
 	/* Position Controls
 	================= */
