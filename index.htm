@@ -36,6 +36,9 @@
 	</div>
 	<div class="container">
 		<div class="container-content">
+			<div class="carousel lol hide">
+
+			</div>
 			<div class="content">
 				<div class="controls">
 					<button type="button" class="btn stream-control">Show Stream</button>
@@ -43,14 +46,14 @@
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
-			</div>
-			<div class="carousel lol hide">
-
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="container-content">
+			<div class="carousel lol hide">
+
+			</div>
 			<div class="content">
 				<div class="controls">
 					<button type="button" class="btn stream-control">Show Stream</button>
@@ -58,9 +61,6 @@
 				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
-			</div>
-			<div class="carousel lol hide">
-
 			</div>
 		</div>
 	</div>
@@ -74,13 +74,13 @@
 		var c  = $('.container');
 		var cl = c.find('.carousel');
 		var cn = c.find('.content');
-		var nh = $(window).height() - cn.height() - 180;
+		var nh = $(window).height() - cn.height() - 120;
 
 
 		cl.height(nh);
 
 		$(window).resize( function() {
-			nh = $(window).height() - cn.height() - 180;
+			nh = $(window).height() - cn.height() - 120;
 			cl.height(nh);
 		});
 
