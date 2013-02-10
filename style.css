@@ -66,9 +66,10 @@ p {
 	}
 
 		.container-content > .content {
-			max-width: 700px;
-			width: 90%;
-			margin: 0 auto 60px;
+			min-width: 700px;
+			max-width: 1200px;
+			width: 40%;
+			margin: 30px auto 88px;
 			position: relative;
 		}
 
@@ -79,6 +80,7 @@ p {
 			}
 
 .carousel {
+	border-bottom: 1px solid black;
 	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.3), inset 0px -10px 10px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.3), inset 0px -10px 10px rgba(0, 0, 0, 0.3);
 	-o-box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.3), inset 0px -10px 10px rgba(0, 0, 0, 0.3);
