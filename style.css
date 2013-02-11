@@ -39,7 +39,7 @@ p {
 		overflow: hidden;
 		position: fixed;
 		right: 0;
-		bottom: 0;
+		top: 0;
 		width: 100px;
 		z-index: 3;
 	}
