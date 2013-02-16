@@ -16,19 +16,28 @@
 	<button type="button" class="hide position-control next">&darr;</button>
 
 	<div class="container-menu">
+		<div class="container-menu-outer"></div>
 		<a class="link-menu" href="#"></a>
 	</div>
 
 	<div class="container">
 		<div class="container-content">
 			<div class="carousel lol hide">
-
+				<div class="player">
+					<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=riotgames" bgcolor="#000000">
+						<param name="allowFullScreen" value="true" />
+						<param name="allowScriptAccess" value="always" />
+						<param name="allowNetworking" value="all" />
+						<param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+						<param name="flashvars" value="hostname=www.twitch.tv&channel=riotgames&auto_play=false&start_volume=25" />
+					</object>
+				</div>
 			</div>
 			<div class="content">
 				<div class="controls">
 					<button type="button" class="btn stream-control">Show Stream</button>
 				</div>
-				<p class="title" title="League of Legends &sdot; 3v3s /w Jme and Joe">League of Legends &sdot; 3v3s /w Jme and Joe</p>
+				<p class="title" title="LoL &sdot; Ranked Yolo Queue &sdot; Diamond IV">LoL &sdot; Ranked Solo Queue &sdot; Diamond IV</p>
 				<p class="author">Streamed by Smoggy&nbsp;&nbsp;&sdot;&nbsp;&nbsp;Started at 22:35, January 25th</p>
 				<p class="stats"><a href="#">12,439 Viewers</a>&nbsp;&nbsp;&sdot;&nbsp;&nbsp;<a href="#">1,935 Followers</a>
 			</div>
@@ -67,6 +76,22 @@
 
 	<script type="text/javascript">
 
+	/* Main Menu
+	========= */
+	(function( $ ) {
+
+		var m  = $('.container-menu-outer');
+		var ml = $('.link-menu');
+
+		ml.mouseenter( function() {
+			m.addClass('active');
+		}).mouseleave( function() {
+			m.removeClass('active');
+		});
+
+	})( jQuery );
+
+
 	/* Stream View
 	============*/
 	(function( $ ) {
@@ -74,18 +99,19 @@
 		var c  = $('.container');
 		var cl = c.find('.carousel');
 		var cn = c.find('.content');
-		var nh = $(window).height() - cn.height() - 120;
+		var nh = $(window).height() - cn.height() - 119;
+		var sc = $(".stream-control");
 
 
 		cl.height(nh);
 
 		$(window).resize( function() {
-			nh = $(window).height() - cn.height() - 120;
-			cl.height(nh);
+			nh = $(window).height() - cn.height() - 119;
+			cl.outerHeight(nh);
 		});
 
 
-		$(".stream-control").click( function() {
+		sc.click( function() {
 
 			var c  = $(this).parentsUntil('.container');
 			var cl = c.find('.carousel');
